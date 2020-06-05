@@ -1,18 +1,32 @@
 {% extends "layout.html" %}
 {% block title %}To-Do App{% endblock %}
-
+<style>
+</style>
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-      </ul>
-    </div>
-  </div>
+
+<div class="page-content page-container" id="page-content">
+	<div class="padding">
+		<div class="row container d-flex justify-content-center">
+			<div class="col-lg-12">
+				<div class="card px-3">
+					<div class="card-body">
+						<h4 class="card-title">Just another to-do app</h4>
+						<div class="add-items d-flex"> <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?" id="newTitle"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn" id="btnNew">Add</button> </div>
+						<div class="list-wrapper">
+							<ul class="d-flex flex-column-reverse todo-list">
+							{% for item in items %}
+								<li {% if item.status == "Completed" %}class="completed"{% endif %}>
+									<div class="form-check"> <label class="form-check-label"> <input class="checkbox" type="checkbox" {% if item.status == "Completed" %} checked {% endif %} id="item-{{item.id}}"> {{item.title}} <i class="input-helper"></i></label> </div> <i class="remove mdi mdi-close-circle-outline" id="del-item-{{item.id}}"></i>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+ 
 {% endblock %}
